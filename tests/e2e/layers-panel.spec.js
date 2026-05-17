@@ -29,12 +29,16 @@ test.describe('Layers panel', () => {
 
     page.once('dialog', (dialog) => dialog.accept('Layer 2'))
     await page.click('#layer_new')
-    await expect.poll(() => layerNames(page)).toContain('Layer 2')
+    await expect.poll(async () => {
+      return await layerNames(page)
+    }).toContain('Layer 2')
 
     await page.locator('#layerlist td.layername', { hasText: 'Layer 2' }).click()
     page.once('dialog', (dialog) => dialog.accept('Renamed Layer'))
     await page.click('#layer_rename')
-    await expect.poll(() => layerNames(page)).toContain('Renamed Layer')
+    await expect.poll(async () => {
+      return await layerNames(page)
+    }).toContain('Renamed Layer')
 
     await toggleVisibilityFor(page, 'Renamed Layer')
     const visibilityClass = await page.$eval(
@@ -49,6 +53,8 @@ test.describe('Layers panel', () => {
 
     await page.locator('#layerlist td.layername', { hasText: 'Renamed Layer' }).click()
     await page.click('#layer_delete')
-    await expect.poll(() => layerNames(page)).not.toContain('Renamed Layer')
+    await expect.poll(async () => {
+      return await layerNames(page)
+    }).not.toContain('Renamed Layer')
   })
 })

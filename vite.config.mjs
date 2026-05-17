@@ -72,7 +72,8 @@ export default defineConfig({
   ].filter(Boolean),
   optimizeDeps: {
     // Restrict dependency scanning to the main editor entry points; archive assets stay untouched.
-    entries: editorEntries
+    entries: editorEntries,
+    include: ['packages/svgcanvas']
   },
   build: {
     outDir: 'dist/editor',
@@ -92,6 +93,9 @@ export default defineConfig({
   },
   test: {
     environment: 'jsdom',
+    execArgv: [
+      '--no-webstorage'
+    ],
     globals: true,
     setupFiles: ['tests/unit/setup-vitest.js'],
     include: ['tests/**/*.test.{js,ts}'],
