@@ -287,7 +287,7 @@ export class Selector {
       steps--
     }
     Object.values(selectModule.getSelectorManager().selectorGrips).forEach((gripElement, i) => {
-      gripElement.setAttribute('style', `cursor:${dirArr[i]}-resize`)
+      gripElement.style.setProperty('cursor', `${dirArr[i]}-resize`)
     })
   }
 }

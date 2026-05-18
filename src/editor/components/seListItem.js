@@ -38,7 +38,7 @@ export class SeListItem extends HTMLElement {
     // this.$svg = this.$menuitem.shadowRoot.querySelector('#checkmark')
     // this.$svg.setAttribute('style', 'display: none;')
     this.$img = this._shadowRoot.querySelector('img')
-    this.$img.setAttribute('style', 'display: none;')
+    this.$img.style.display = 'none'
     this.imgPath = svgEditor.configObj.curConfig.imgPath
     this.$menuitem.addEventListener('mousedown', e => {
       this.$menuitem.dispatchEvent(new CustomEvent('selectedindexchange', {
@@ -72,7 +72,7 @@ export class SeListItem extends HTMLElement {
         this.$menuitem.textContent = t(newValue)
         break
       case 'src':
-        this.$img.setAttribute('style', 'display: block;')
+        this.$img.style.display = 'block'
         this.$img.setAttribute('src', this.imgPath + '/' + newValue)
         break
       case 'title':

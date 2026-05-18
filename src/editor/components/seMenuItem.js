@@ -29,7 +29,7 @@ export class SeMenuItem extends HTMLElement {
     this.$label = this._shadowRoot.querySelector('span')
     this.$menuitem = this._shadowRoot.querySelector('elix-menu-item')
     this.$svg = this.$menuitem.shadowRoot.querySelector('#checkmark')
-    this.$svg.setAttribute('style', 'display: none;')
+    this.$svg.style.display= 'none'
     this.imgPath = svgEditor.configObj.curConfig.imgPath
   }
 

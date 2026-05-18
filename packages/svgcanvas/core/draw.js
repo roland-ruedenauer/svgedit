@@ -1102,7 +1102,7 @@ export const leaveContext = () => {
       } else {
         elem.setAttribute('opacity', orig)
       }
-      elem.setAttribute('style', 'pointer-events: inherit')
+      elem.style.setProperty('pointer-events', 'inherit')
       dataStorage.remove(elem, 'orig_opac')
     }
     disabledElems = []
@@ -1172,7 +1172,7 @@ export const setContext = elem => {
     const parsedOpacity = Number.parseFloat(origOpacity)
     const opac = Number.isFinite(parsedOpacity) ? parsedOpacity : 1
     curthis.setAttribute('opacity', opac * 0.33)
-    curthis.setAttribute('style', 'pointer-events: none')
+    curthis.style.setProperty('pointer-events', 'none')
     disabledElems.push(curthis)
   })
   svgCanvas.clearSelection()
