@@ -1307,10 +1307,19 @@ export const assignAttributes = (elem, attrs, suspendLength, unitCheck) => {
     if (ns) {
       elem.setAttributeNS(ns, key, value)
     } else if (!unitCheck) {
+      if (key === 'style') {
+        console.log('setting inline-style')
+      }
       elem.setAttribute(key, value)
     } else {
       setUnitAttr(elem, key, value)
     }
+  }
+}
+
+export const assignStyles = (elem, styles) => {
+  for (const [key, value] of Object.entries(styles)) {
+    elem.style.setProperty(key, value)
   }
 }
 

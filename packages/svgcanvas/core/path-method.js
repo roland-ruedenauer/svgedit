@@ -12,7 +12,7 @@ import {
   transformPoint, getMatrix
 } from './math.js'
 import {
-  assignAttributes, getRotationAngle,
+  assignAttributes, assignStyles, getRotationAngle,
   getElement
 } from './utilities.js'
 
@@ -312,14 +312,14 @@ export const addPointGripMethod = (index, x, y) => {
       fill: '#0FF',
       stroke: '#00F',
       'stroke-width': 2,
-      cursor: 'move',
-      style: 'pointer-events:all'
+      cursor: 'move'
     }
     const uiStrings = svgCanvas.getUIStrings()
     if ('pathNodeTooltip' in uiStrings) { // May be empty if running path.js without svg-editor
       atts['xlink:title'] = uiStrings.pathNodeTooltip
     }
     assignAttributes(pointGrip, atts)
+    assignStyles(pointGrip, { 'pointer-events': 'all' })
     pointGripContainer.append(pointGrip)
 
     const grip = document.getElementById('pathpointgrip_' + index)
@@ -359,14 +359,14 @@ export const addCtrlGripMethod = (id) => {
     fill: '#0FF',
     stroke: '#55F',
     'stroke-width': 1,
-    cursor: 'move',
-    style: 'pointer-events:all'
+    cursor: 'move'
   }
   const uiStrings = svgCanvas.getUIStrings()
   if ('pathCtrlPtTooltip' in uiStrings) { // May be empty if running path.js without svg-editor
     atts['xlink:title'] = uiStrings.pathCtrlPtTooltip
   }
   assignAttributes(pointGrip, atts)
+  assignStyles(pointGrip, { 'pointer-events': 'all' })
   getGripContainerMethod().append(pointGrip)
   return pointGrip
 }
@@ -383,9 +383,9 @@ export const getCtrlLineMethod = (id) => {
   assignAttributes(ctrlLine, {
     id: 'ctrlLine_' + id,
     stroke: '#555',
-    'stroke-width': 1,
-    style: 'pointer-events:none'
+    'stroke-width': 1
   })
+  assignStyles(ctrlLine, { 'pointer-events': 'none' })
   getGripContainerMethod().append(ctrlLine)
   return ctrlLine
 }
@@ -511,9 +511,9 @@ export const getSegSelectorMethod = (seg, update) => {
       fill: 'none',
       stroke: '#0FF',
       'stroke-width': 2,
-      style: 'pointer-events:none',
       d: 'M0,0 0,0'
     })
+    assignStyles(segLine, { 'pointer-events': 'none' })
     pointGripContainer.append(segLine)
   }
 

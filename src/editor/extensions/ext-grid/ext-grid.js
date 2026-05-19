@@ -29,7 +29,7 @@ export default {
     const { svgCanvas } = svgEditor
     const { $id, $click, NS } = svgCanvas
     const svgdoc = $id('svgcanvas').ownerDocument
-    const { assignAttributes } = svgCanvas
+    const { assignAttributes, assignStyles } = svgCanvas
     const hcanvas = document.createElement('canvas')
     const canvBG = $id('canvasBackground')
     const units = svgCanvas.getTypeMap() // Assumes prior `init()` call on `units.js` module
@@ -82,8 +82,11 @@ export default {
       y: 0,
       'stroke-width': 0,
       stroke: 'none',
-      fill: 'url(#gridpattern)',
-      style: 'pointer-events: none; display:visible;'
+      fill: 'url(#gridpattern)'
+    })
+    assignStyles(gridBox, {
+      'pointer-events': 'none',
+      'display': 'visible'
     })
     $id('canvasGrid').appendChild(gridBox)
 

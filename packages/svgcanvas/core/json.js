@@ -5,7 +5,7 @@
  *
  * @copyright 2010 Alexis Deveria, 2010 Jeff Schiller
  */
-import { getElement, assignAttributes, cleanupElement } from './utilities.js'
+import { getElement, assignAttributes, assignStyles, cleanupElement } from './utilities.js'
 import { NS } from './namespaces.js'
 
 let svgCanvas = null
@@ -128,11 +128,16 @@ export const addSVGElementsFromJson = (data) => {
       'stroke-linecap': curShape.stroke_linecap,
       'stroke-opacity': curShape.stroke_opacity,
       'fill-opacity': curShape.fill_opacity,
-      opacity,
-      style: 'pointer-events:inherit'
+      opacity
     }, 100)
+    assignStyles(shape, {
+      'pointer-events': 'inherit'
+    })
   }
   assignAttributes(shape, attrs, 100)
+  if (typeof data.style !== 'undefined') {
+    assignStyles(shape, data.style)
+  }
   cleanupElement(shape)
 
   // Children

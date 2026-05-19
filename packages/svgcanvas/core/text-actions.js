@@ -9,6 +9,7 @@ import { NS } from './namespaces.js'
 import { transformPoint, matrixMultiply, getTransformList, transformListToTransform } from './math.js'
 import {
   assignAttributes,
+  assignStyles,
   getElement,
   getBBox as utilsGetBBox
 } from './utilities.js'
@@ -162,9 +163,9 @@ class TextActions {
       assignAttributes(this.#selblock, {
         id: 'text_selectblock',
         fill: 'green',
-        opacity: 0.5,
-        style: 'pointer-events:none'
+        opacity: 0.5
       })
+      assignStyles(this.#selblock, { 'pointer-events': 'none' })
       getElement('selectorParentGroup').append(this.#selblock)
     }
 

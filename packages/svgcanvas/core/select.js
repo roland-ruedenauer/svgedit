@@ -74,9 +74,11 @@ export class Selector {
         fill: 'none',
         stroke: '#22C',
         'stroke-width': '1',
-        'stroke-dasharray': '5,5',
-        // need to specify this so that the rect is not selectable
-        style: 'pointer-events:none'
+        'stroke-dasharray': '5,5'
+      },
+      // need to specify this so that the rect is not selectable
+      style: {
+        'pointer-events': 'none'
       }
     })
     this.selectorGroup.append(this.selectorRect)
@@ -366,12 +368,14 @@ export class SelectorManager {
           id: `selectorGrip_resize_${dir}`,
           fill: '#22C',
           r: gripRadius,
-          style: `cursor:${dir}-resize`,
           // This expands the mouse-able area of the grips making them
           // easier to grab with the mouse.
           // This works in Opera and WebKit, but does not work in Firefox
           // see https://bugzilla.mozilla.org/show_bug.cgi?id=500174
-          'stroke-width': 2,
+          'stroke-width': 2
+        },
+        style: {
+          cursor: `${dir}-resize`,
           'pointer-events': 'all'
         }
       })
@@ -402,8 +406,10 @@ export class SelectorManager {
           fill: 'lime',
           r: gripRadius,
           stroke: '#22C',
-          'stroke-width': 2,
-          style: `cursor:url(${svgCanvas.curConfig.imgPath}/rotate.svg) 12 12, auto;`
+          'stroke-width': 2
+        },
+        style: {
+          cursor: `:url(${svgCanvas.curConfig.imgPath}/rotate.svg) 12 12, auto;`
         }
       })
     this.selectorGripsGroup.append(this.rotateGrip)
@@ -420,8 +426,10 @@ export class SelectorManager {
         height,
         x: 0,
         y: 0,
-        overflow: (isWebkit() ? 'none' : 'visible'), // Chrome 7 has a problem with this when zooming out
-        style: 'pointer-events:none'
+        overflow: isWebkit() ? 'none' : 'visible' // Chrome 7 has a problem with this when zooming out
+      },
+      style: {
+        'pointer-events': 'none'
       }
     })
 
@@ -434,8 +442,10 @@ export class SelectorManager {
         y: 0,
         'stroke-width': 1,
         stroke: '#000',
-        fill: '#FFF',
-        style: 'pointer-events:none'
+        fill: '#FFF'
+      },
+      style: {
+        'pointer-events': 'none'
       }
     })
     canvasbg.append(rect)
@@ -518,8 +528,10 @@ export class SelectorManager {
             'fill-opacity': 0.15,
             stroke: '#22C',
             'stroke-width': 0.5,
-            display: 'none',
-            style: 'pointer-events:none'
+            display: 'none'
+          },
+          style: {
+            'pointer-events': 'none'
           }
         })
       this.selectorParentGroup.append(this.rubberBandBox)

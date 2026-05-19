@@ -457,8 +457,8 @@ export default {
                     : startElem.stroke_width,
                 fill: 'none',
                 opacity: initStroke.opacity,
-                style: 'pointer-events:none'
-              }
+              },
+              style: {'pointer-events': 'none'}
             })
 
             // Store the bounding box of the start element

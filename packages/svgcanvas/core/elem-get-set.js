@@ -1164,15 +1164,15 @@ const setBackgroundMethod = (color, url) => {
         id: 'background_pattern',
         width: '100%',
         height: '100%',
-        preserveAspectRatio: 'xMinYMin',
-        style: 'pointer-events:none'
+        preserveAspectRatio: 'xMinYMin'
       })
+      svgCanvas.assignAttributes(bgPattern, { 'pointer-events': 'none' })
       const div = document.createElement('div')
-      svgCanvas.assignAttributes(div, {
-        style: 'pointer-events:none;width:100%;height:100%;' +
-          'background-image:url(data:image/gif;base64,' +
-          'R0lGODlhEAAQAIAAAP///9bW1iH5BAAAAAAALAAAAAAQABAAAAIfjG+' +
-          'gq4jM3IFLJgpswNly/XkcBpIiVaInlLJr9FZWAQA7);'
+      svgCanvas.assignStyles(div, {
+        'pointer-events': 'none',
+        'width': '100%',
+        'height': '100%',
+        'background-image': 'url(data:image/gif;base64,R0lGODlhEAAQAIAAAP///9bW1iH5BAAAAAAALAAAAAAQABAAAAIfjG+gq4jM3IFLJgpswNly/XkcBpIiVaInlLJr9FZWAQA7);'
       })
       bgPattern.append(div)
       bg.append(bgPattern)
@@ -1187,9 +1187,9 @@ const setBackgroundMethod = (color, url) => {
         id: 'background_image',
         width: '100%',
         height: '100%',
-        preserveAspectRatio: 'xMinYMin',
-        style: 'pointer-events:none'
+        preserveAspectRatio: 'xMinYMin'
       })
+      svgCanvas.assignStyles(bgImg, { 'pointer-events': 'none' })
     }
     setHref(bgImg, url)
     bg.append(bgImg)

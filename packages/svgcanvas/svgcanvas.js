@@ -41,6 +41,7 @@ import { sanitizeSvg } from './core/sanitize.js'
 import { getReverseNS, NS } from './core/namespaces.js'
 import {
   assignAttributes,
+  assignStyles,
   cleanupElement,
   getElement,
   getUrlFromAttr,
@@ -64,8 +65,8 @@ import {
   $click,
   getFeGaussianBlur,
   stringToHTML,
-  insertChildAtIndex
-} from './core/utilities.js'
+  insertChildAtIndex,
+} from "./core/utilities.js";
 import {
   matrixMultiply,
   hasMatrixTransform,
@@ -409,7 +410,7 @@ class SvgCanvas {
   }
 
   createSVGElement (jsonMap) {
-    return this.addSVGElementsFromJson(jsonMap)
+    return this.addSVGElementsFromJson(jsonMap);
   }
 
   getContainer () {
@@ -1319,6 +1320,7 @@ class SvgCanvas {
     this.getElement = getElement
     this.getRefElem = getRefElem
     this.assignAttributes = assignAttributes
+    this.assignStyles = assignStyles;
     this.cleanupElement = cleanupElement
     this.remapElement = remapElement
     this.recalculateDimensions = recalculateDimensions
