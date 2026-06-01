@@ -8,6 +8,7 @@ import {
 import editorTemplate from './templates/editorTemplate.html'
 import SvgCanvas from '@svgedit/svgcanvas'
 import Rulers from './Rulers.js'
+import { cloneNodeAndSetNonce } from './support.js'
 
 /**
    * @fires module:svgcanvas.SvgCanvas#event:svgEditorReady
@@ -72,7 +73,7 @@ class EditorStartup {
       // add editor components to the DOM
       const template = document.createElement('template')
       template.innerHTML = editorTemplate
-      this.$container.append(template.content.cloneNode(true))
+      this.$container.append(cloneNodeAndSetNonce(template.content))
       this.$svgEditor = this.$container.querySelector('.svg_editor')
       // allow to prepare the dom without display
       this.$svgEditor.style.visibility = 'hidden'

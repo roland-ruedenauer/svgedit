@@ -2,6 +2,7 @@
 import { jGraduate, jGraduateMethod } from './jgraduate/jQuery.jGraduate.js'
 import PaintBox from './PaintBox.js'
 import { t } from '../locale.js'
+import { cloneNodeAndSetNonce } from '../support.js'
 
 const template = document.createElement('template')
 template.innerHTML = `
@@ -646,6 +647,7 @@ div.jGraduate_Slider img {
   <!-- hidden div -->
   <div id="color_picker"></div>
 `
+
 /**
  * @class SeColorPicker
  */
@@ -657,7 +659,7 @@ export class SeColorPicker extends HTMLElement {
     super()
     // create the shadowDom and insert the template
     this._shadowRoot = this.attachShadow({ mode: 'open' })
-    this._shadowRoot.append(template.content.cloneNode(true))
+    this._shadowRoot.append(cloneNodeAndSetNonce(template.content))
     this.$logo = this._shadowRoot.getElementById('logo')
     this.$label = this._shadowRoot.getElementById('label')
     this.$block = this._shadowRoot.getElementById('block')

@@ -1,6 +1,7 @@
 /* globals svgEditor */
 import 'elix/define/MenuItem.js'
 import './sePlainMenuButton.js'
+import { cloneNodeAndSetNonce } from '../support.js'
 
 const template = document.createElement('template')
 template.innerHTML = `
@@ -28,8 +29,8 @@ template.innerHTML = `
   <elix-menu-button id="MenuButton" aria-label="Main Menu">
     <slot></slot>
   </elix-menu-button>
-
 `
+
 /**
  * @class SeMenu
  */
@@ -41,7 +42,7 @@ export class SeMenu extends HTMLElement {
     super()
     // create the shadowDom and insert the template
     this._shadowRoot = this.attachShadow({ mode: 'open' })
-    this._shadowRoot.append(template.content.cloneNode(true))
+    this._shadowRoot.append(cloneNodeAndSetNonce(template.content))
     this.$menu = this._shadowRoot.querySelector('elix-menu-button')
     this.$label = this.$menu.shadowRoot.querySelector('#popupToggle').shadowRoot
     this.imgPath = svgEditor.configObj.curConfig.imgPath

@@ -1,11 +1,13 @@
 import SvgCanvas from '@svgedit/svgcanvas'
 /* globals svgEditor */
 import imagePropertiesDialogHTML from './imagePropertiesDialog.html'
+import { cloneNodeAndSetNonce } from '../support.js'
 
 const { isValidUnit } = SvgCanvas
 
 const template = document.createElement('template')
 template.innerHTML = imagePropertiesDialogHTML
+
 /**
  * @class SeImgPropDialog
  */
@@ -18,7 +20,7 @@ export class SeImgPropDialog extends HTMLElement {
     // create the shadowDom and insert the template
     this.eventlisten = false
     this._shadowRoot = this.attachShadow({ mode: 'open' })
-    this._shadowRoot.append(template.content.cloneNode(true))
+    this._shadowRoot.append(cloneNodeAndSetNonce(template.content))
     this.$saveBtn = this._shadowRoot.querySelector('#tool_docprops_save')
     this.$cancelBtn = this._shadowRoot.querySelector('#tool_docprops_cancel')
     this.$resolution = this._shadowRoot.querySelector('#resolution')

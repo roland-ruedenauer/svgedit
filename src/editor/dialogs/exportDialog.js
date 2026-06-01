@@ -1,9 +1,12 @@
 /* globals svgEditor */
 import './se-elix/define/NumberSpinBox.js'
 
+import { cloneNodeAndSetNonce } from '../support.js'
 import exportDialogHTML from './exportDialog.html'
+
 const template = document.createElement('template')
 template.innerHTML = exportDialogHTML
+
 /**
  * @class SeExportDialog
  */
@@ -15,7 +18,7 @@ export class SeExportDialog extends HTMLElement {
     super()
     // create the shadowDom and insert the template
     this._shadowRoot = this.attachShadow({ mode: 'open' })
-    this._shadowRoot.append(template.content.cloneNode(true))
+    this._shadowRoot.append(cloneNodeAndSetNonce(template.content))
     this.$dialog = this._shadowRoot.querySelector('#export_box')
     this.$okBtn = this._shadowRoot.querySelector('#export_ok')
     this.$cancelBtn = this._shadowRoot.querySelector('#export_cancel')

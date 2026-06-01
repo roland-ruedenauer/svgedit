@@ -2,6 +2,8 @@
 import 'elix/define/Menu.js'
 import 'elix/define/MenuItem.js'
 import { t } from '../locale.js'
+import { cloneNodeAndSetNonce } from '../support.js'
+
 const template = document.createElement('template')
 template.innerHTML = `
   <style>
@@ -16,6 +18,7 @@ template.innerHTML = `
     </div>
   </elix-menu-item>
 `
+
 /**
  * @class SeMenuItem
  */
@@ -27,7 +30,7 @@ export class SeMenuItem extends HTMLElement {
     super()
     // create the shadowDom and insert the template
     this._shadowRoot = this.attachShadow({ mode: 'open' })
-    this._shadowRoot.append(template.content.cloneNode(true))
+    this._shadowRoot.append(cloneNodeAndSetNonce(template.content))
     this.$img = this._shadowRoot.querySelector('img')
     this.$img.style.display = 'none'
     this.$label = this._shadowRoot.querySelector('span')

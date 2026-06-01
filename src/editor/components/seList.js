@@ -1,5 +1,6 @@
 /* globals svgEditor */
 import { t } from '../locale.js'
+import { cloneNodeAndSetNonce } from '../support.js'
 
 const template = document.createElement('template')
 template.innerHTML = `
@@ -54,7 +55,7 @@ export class SeList extends HTMLElement {
     super()
     // create the shadowDom and insert the template
     this._shadowRoot = this.attachShadow({ mode: 'open' })
-    this._shadowRoot.append(template.content.cloneNode(true))
+    this._shadowRoot.append(cloneNodeAndSetNonce(template.content))
     this.$dropdown = this._shadowRoot.querySelector('#select-container')
     this.$label = this._shadowRoot.querySelector('label')
     this.$selection = this.$dropdown.querySelector('#selected-value')

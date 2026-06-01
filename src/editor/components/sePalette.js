@@ -1,5 +1,7 @@
 /* globals svgEditor */
 /* eslint-disable max-len */
+import { cloneNodeAndSetNonce } from '../support.js'
+
 const palette = [
   // Todo: Make into configuration item?
   'none',
@@ -125,7 +127,7 @@ export class SEPalette extends HTMLElement {
     super()
     // create the shadowDom and insert the template
     this._shadowRoot = this.attachShadow({ mode: 'open' })
-    this._shadowRoot.append(template.content.cloneNode(true))
+    this._shadowRoot.append(cloneNodeAndSetNonce(template.content))
     this.$strip = this._shadowRoot.querySelector('#js-se-palette')
     this.expand_btn = this._shadowRoot.querySelector(
       'button.palette_expand_btn'

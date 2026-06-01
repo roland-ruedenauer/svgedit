@@ -1,7 +1,10 @@
 /* globals svgEditor */
 import cMenuDialogHTML from './cmenuDialog.html'
+import { cloneNodeAndSetNonce } from '../support.js'
+
 const template = document.createElement('template')
 template.innerHTML = cMenuDialogHTML
+
 /**
  * @class SeCMenuDialog
  */
@@ -13,7 +16,7 @@ export class SeCMenuDialog extends HTMLElement {
     super()
     // create the shadowDom and insert the template
     this._shadowRoot = this.attachShadow({ mode: 'open' })
-    this._shadowRoot.append(template.content.cloneNode(true))
+    this._shadowRoot.append(cloneNodeAndSetNonce(template.content))
     this._workarea = document.getElementById('workarea')
     this.$dialog = this._shadowRoot.querySelector('#cmenu_canvas')
     this.$copyLink = this._shadowRoot.querySelector('#se-copy')

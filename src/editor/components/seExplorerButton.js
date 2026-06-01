@@ -1,5 +1,7 @@
 /* globals svgEditor */
 
+import { cloneNodeAndSetNonce } from '../support'
+
 /**
  * @class ExplorerButton
  */
@@ -14,7 +16,7 @@ export class ExplorerButton extends HTMLElement {
     this.imgPath = svgEditor.configObj.curConfig.imgPath
     this.template = this.createTemplate(this.imgPath)
     this._shadowRoot = this.attachShadow({ mode: 'open' })
-    this._shadowRoot.append(this.template.content.cloneNode(true))
+    this._shadowRoot.append(cloneNodeAndSetNonce(this.template.content))
     // locate the component
     this.$button = this._shadowRoot.querySelector('.menu-button')
     this.$overall = this._shadowRoot.querySelector('.overall')
@@ -125,7 +127,7 @@ export class ExplorerButton extends HTMLElement {
       background: none !important;
     }
     </style>
-  
+
     <div class="overall">
       <div class="menu-button">
         <img class="button-icon" src="explorer.svg" alt="icon">

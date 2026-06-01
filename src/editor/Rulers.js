@@ -1,5 +1,6 @@
 import rulersTemplate from './templates/rulersTemplate.html'
 import SvgCanvas from '@svgedit/svgcanvas'
+import { cloneNodeAndSetNonce } from './support.js'
 
 const { $id, getTypeMap } = SvgCanvas
 
@@ -23,7 +24,7 @@ class Rulers {
     // add rulers component to the DOM
     const template = document.createElement('template')
     template.innerHTML = rulersTemplate
-    this.editor.$svgEditor.append(template.content.cloneNode(true))
+    this.editor.$svgEditor.append(cloneNodeAndSetNonce(template.content))
     const { $id } = SvgCanvas
     this.rulerX = $id('ruler_x')
     this.rulerY = $id('ruler_y')

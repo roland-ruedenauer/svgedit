@@ -1,6 +1,7 @@
 /* globals svgEditor */
 import '../dialogs/se-elix/define/NumberSpinBox.js'
 import { t } from '../locale.js'
+import { cloneNodeAndSetNonce } from '../support.js'
 
 const template = document.createElement('template')
 template.innerHTML = `
@@ -62,7 +63,7 @@ export class SESpinInput extends HTMLElement {
     super()
     // create the shadowDom and insert the template
     this._shadowRoot = this.attachShadow({ mode: 'open' })
-    this._shadowRoot.append(template.content.cloneNode(true))
+    this._shadowRoot.append(cloneNodeAndSetNonce(template.content))
     // locate the component
     this.$div = this._shadowRoot.querySelector('div')
     this.$img = this._shadowRoot.querySelector('img')

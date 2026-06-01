@@ -1,5 +1,6 @@
 import SvgCanvas from '@svgedit/svgcanvas'
 import LayersPanelHtml from './LayersPanel.html'
+import { cloneNodeAndSetNonce } from '../support.js'
 
 const { $id, $click } = SvgCanvas
 
@@ -47,7 +48,7 @@ class LayersPanel {
     const { i18next } = this.editor
 
     template.innerHTML = LayersPanelHtml
-    this.editor.$svgEditor.append(template.content.cloneNode(true))
+    this.editor.$svgEditor.append(cloneNodeAndSetNonce(template.content))
     // layer menu added to DOM
     const menuMore = document.createElement('se-cmenu-layers')
     menuMore.setAttribute('id', 'se-cmenu-layers-more')

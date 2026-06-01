@@ -1,8 +1,10 @@
 /* globals svgEditor */
 import cMenuLayersDialog from './cmenuLayersDialog.html'
+import { cloneNodeAndSetNonce } from '../support.js'
 
 const template = document.createElement('template')
 template.innerHTML = cMenuLayersDialog
+
 /**
  * @class SeCMenuLayerDialog
  */
@@ -14,7 +16,7 @@ export class SeCMenuLayerDialog extends HTMLElement {
     super()
     // create the shadowDom and insert the template
     this._shadowRoot = this.attachShadow({ mode: 'open' })
-    this._shadowRoot.append(template.content.cloneNode(true))
+    this._shadowRoot.append(cloneNodeAndSetNonce(template.content))
     this.source = ''
     this._workarea = undefined
     this.$sidePanels = document.getElementById('sidepanels')

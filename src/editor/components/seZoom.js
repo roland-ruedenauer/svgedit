@@ -1,4 +1,6 @@
 /* globals svgEditor */
+import { cloneNodeAndSetNonce } from '../support.js'
+
 const template = document.createElement('template')
 template.innerHTML = `
   <style>
@@ -120,7 +122,7 @@ class SeZoom extends HTMLElement {
     // create the shadowDom and insert the template
     this._shadowRoot = this.attachShadow({ mode: 'open' })
     // locate the component
-    this._shadowRoot.append(template.content.cloneNode(true))
+    this._shadowRoot.append(cloneNodeAndSetNonce(template.content))
 
     // prepare the slot element
     this.slotElement = this._shadowRoot.querySelector('slot')

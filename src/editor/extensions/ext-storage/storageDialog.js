@@ -3,6 +3,18 @@ import storageDialogHTML from './storageDialog.html'
 
 const template = document.createElement('template')
 template.innerHTML = storageDialogHTML
+
+// XXX: provide functionality in svgeditor?
+const cloneNodeAndSetNonce = function (node) {
+  const clone = node.cloneNode(true);
+  const nonce = window.svgeditNonce;
+  const clonedStyles = clone.querySelectorAll("style");
+  clonedStyles.forEach((style) => {
+    style.setAttribute("nonce", nonce);
+  });
+  return clone;
+}
+
 /**
  * @class SeStorageDialog
  */
@@ -14,7 +26,7 @@ export class SeStorageDialog extends HTMLElement {
     super()
     // create the shadowDom and insert the template
     this._shadowRoot = this.attachShadow({ mode: 'open' })
-    this._shadowRoot.append(template.content.cloneNode(true))
+    this._shadowRoot.append(cloneNodeAndSetNonce(template.content))
     this.$dialog = this._shadowRoot.querySelector('#dialog_box')
     this.$storage = this._shadowRoot.querySelector('#js-storage')
     this.$okBtn = this._shadowRoot.querySelector('#storage_ok')
