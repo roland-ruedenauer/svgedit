@@ -111,7 +111,7 @@ template.innerHTML = `
   </div>
   <button class="palette_expand_btn" title="Show whole palette">▼</button>
   <!-- hidden div -->
-  <div id="palette_popup" style="display:none"/>
+  <div id="palette_popup"/>
 `
 
 /**
@@ -131,6 +131,7 @@ export class SEPalette extends HTMLElement {
       'button.palette_expand_btn'
     )
     this.popUp = this._shadowRoot.getElementById('palette_popup')
+    this.popUp.style.display = 'none'
     svgEditor.$click(this.expand_btn, (e) => {
       e.stopPropagation()
       const { display } = this.popUp.style

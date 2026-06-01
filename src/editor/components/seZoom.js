@@ -102,7 +102,7 @@ template.innerHTML = `
       <img width="16" height="8" src="arrow_down.svg" alt="Zoom dropdown"/>
     </div>
   </div>
-  <div id="options-container" style="display:none">
+  <div id="options-container">
     <slot></slot>
   </div>
 `
@@ -175,6 +175,7 @@ class SeZoom extends HTMLElement {
     this.optionsContainer = this._shadowRoot.querySelector(
       '#options-container'
     )
+    this.optionsContainer.style.display = 'none'
 
     // add an event listener to close the popup
     document.addEventListener('click', e => this.handleClose(e))

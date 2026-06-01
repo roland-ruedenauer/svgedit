@@ -318,7 +318,7 @@ class LayersPanel {
     while (num-- > 0) {
       // TODO: there must a better way to do this
       const tlayer = document.createElement('tr')
-      tlayer.innerHTML = '<td style="color:white">_</td><td/>'
+      tlayer.innerHTML = '<td class="layerempty">_</td><td/>'
       layerlist.append(tlayer)
     }
     // run extension when layer panel is populated

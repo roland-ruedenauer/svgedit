@@ -5,11 +5,14 @@ import { t } from '../locale.js'
 const template = document.createElement('template')
 template.innerHTML = `
   <style>
+    [part~="menu-item-div"] { display:flex; align-items: center; }
+    [part~="menu-item-img"] {  }
+    [part~="menu-item-span"] { margin-left: 7px; }
   </style>
   <elix-menu-item>
-    <div style="display:flex; align-items: center;">
-      <img src="logo.svg" alt="icon" style="display:none;" width="24"/>
-      <span style="margin-left: 7px;"></span>
+    <div parte="menu-item-div">
+      <img src="logo.svg" alt="icon" part="menu-item-img" width="24"/>
+      <span part="menu-item-span"></span>
     </div>
   </elix-menu-item>
 `
@@ -26,6 +29,7 @@ export class SeMenuItem extends HTMLElement {
     this._shadowRoot = this.attachShadow({ mode: 'open' })
     this._shadowRoot.append(template.content.cloneNode(true))
     this.$img = this._shadowRoot.querySelector('img')
+    this.$img.style.display = 'none'
     this.$label = this._shadowRoot.querySelector('span')
     this.$menuitem = this._shadowRoot.querySelector('elix-menu-item')
     this.$svg = this.$menuitem.shadowRoot.querySelector('#checkmark')
