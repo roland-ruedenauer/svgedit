@@ -4,6 +4,10 @@ import dynamicImportVars from '@rollup/plugin-dynamic-import-vars'
 import string from 'vite-plugin-string'
 import istanbul from 'vite-plugin-istanbul'
 
+const cspHeaders = {
+  'Content-Security-Policy-Report-Only': `script-src 'self'; style-src-attr 'self'; style-src-elem 'self' 'nonce-TESTNONCE'; frame-ancestors 'self'; frame-src 'self';`
+}
+
 const editorEntries = [
   resolve(import.meta.dirname, "src/editor/index.html"),
   resolve(import.meta.dirname, "src/editor/iife-index.html"),
@@ -67,6 +71,17 @@ export default defineConfig({
             asset.source = asset.source.toString()
           }
         }
+      },
+    },
+    {
+      name: 'set-csp-headers',
+      configureServer(server) {
+        server.middlewares.use((req, res, next) => {
+          for (const [key, value] of Object.entries(cspHeaders)) {
+            res.setHeader(key, value)
+          }
+          next()
+        })
       }
     }
   ].filter(Boolean),
