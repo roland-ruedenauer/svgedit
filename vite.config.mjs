@@ -5,10 +5,10 @@ import string from 'vite-plugin-string'
 import istanbul from 'vite-plugin-istanbul'
 
 const editorEntries = [
-  resolve(__dirname, 'src/editor/index.html'),
-  resolve(__dirname, 'src/editor/iife-index.html'),
-  resolve(__dirname, 'src/editor/xdomain-index.html')
-]
+  resolve(import.meta.dirname, "src/editor/index.html"),
+  resolve(import.meta.dirname, "src/editor/iife-index.html"),
+  resolve(import.meta.dirname, "src/editor/xdomain-index.html"),
+];
 
 const coverageEnabled = process.env.COVERAGE === 'true' || process.env.NODE_ENV === 'test'
 const htmlStringPlugin = string({
@@ -80,7 +80,7 @@ export default defineConfig({
     emptyOutDir: true,
     sourcemap: true,
     lib: {
-      entry: resolve(__dirname, 'src/editor/Editor.js'),
+      entry: resolve(import.meta.dirname, 'src/editor/Editor.js'),
       name: 'Editor',
       formats: ['es', 'iife'],
       fileName: format => (format === 'iife' ? 'iife-Editor.js' : 'Editor.js')

@@ -7,7 +7,7 @@ export default defineConfig({
     emptyOutDir: true,
     sourcemap: true,
     lib: {
-      entry: resolve(__dirname, 'svgcanvas.js'),
+      entry: resolve(import.meta.dirname, 'svgcanvas.js'),
       formats: ['es'],
       fileName: () => 'svgcanvas.js'
     },
