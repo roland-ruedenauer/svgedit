@@ -93,6 +93,7 @@
   "devDependencies": {
     "@playwright/test": "^1.61.1",
     "@rollup/plugin-dynamic-import-vars": "2.1.5",
+    "@types/trusted-types": "^2.0.7",
     "@vitest/coverage-v8": "^4.1.10",
     "jamilih": "0.63.1",
     "jsdoc": "4.0.5",
