@@ -1,8 +1,8 @@
 import { t } from '../locale.js'
-import { cloneNodeAndSetNonce } from '../support.js'
+import { cloneNodeAndSetNonce, createTrustedHTML } from '../support.js'
 
 const template = document.createElement('template')
-template.innerHTML = `
+template.innerHTML = createTrustedHTML(`
 <style>
 select {
   margin-top: 8px;
@@ -22,8 +22,8 @@ label {
   <label></label>
   <select>
   </select>
+`)
 
-`
 /**
  * @class SeList
  */

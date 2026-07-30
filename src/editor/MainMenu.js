@@ -1,6 +1,7 @@
 /* globals seAlert */
 import SvgCanvas from '@svgedit/svgcanvas'
 import { isChrome } from '@svgedit/svgcanvas/common/browser.js'
+import { createTrustedHTML } from './support.js'
 
 const { $id, $click, convertUnit, isValidUnit } = SvgCanvas
 const homePage = 'https://github.com/SVG-Edit/svgedit'
@@ -225,13 +226,13 @@ class MainMenu {
   init () {
     // add Top panel
     const template = document.createElement('template')
-    template.innerHTML = `
+    template.innerHTML = createTrustedHTML(`
     <se-menu id="main_button" label="SVG-Edit" src="logo.svg" alt="logo">
         <se-menu-item id="tool_export" label="tools.export_img" src="export.svg"></se-menu-item>
         <se-menu-item id="tool_docprops" label="tools.docprops" shortcut="shift+D" src="docprop.svg"></se-menu-item>
         <se-menu-item id="tool_editor_prefs" label="config.editor_prefs" src="editPref.svg"></se-menu-item>
         <se-menu-item id="tool_editor_homepage" label="tools.editor_homepage" src="logo.svg"></se-menu-item>
-    </se-menu>`
+    </se-menu>`)
     this.editor.$svgEditor.append(template.content.cloneNode(true))
 
     // register action to main menu entries

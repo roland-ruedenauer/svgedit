@@ -2,10 +2,10 @@
 import 'elix/define/Menu.js'
 import 'elix/define/MenuItem.js'
 import { t } from '../locale.js'
-import { cloneNodeAndSetNonce } from '../support.js'
+import { cloneNodeAndSetNonce, createTrustedHTML } from '../support.js'
 
 const template = document.createElement('template')
-template.innerHTML = `
+template.innerHTML = createTrustedHTML(`
   <style>
     [part~="menu-item-div"] { display:flex; align-items: center; }
     [part~="menu-item-img"] {  }
@@ -17,7 +17,7 @@ template.innerHTML = `
       <span part="menu-item-span"></span>
     </div>
   </elix-menu-item>
-`
+`)
 
 /**
  * @class SeMenuItem

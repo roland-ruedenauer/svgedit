@@ -1,8 +1,8 @@
 /* globals svgEditor */
-import { cloneNodeAndSetNonce } from '../support.js'
+import { cloneNodeAndSetNonce, createTrustedHTML } from '../support.js'
 
 const template = document.createElement('template')
-template.innerHTML = `
+template.innerHTML = createTrustedHTML(`
   <style>
   input{
     border:unset;
@@ -107,7 +107,7 @@ template.innerHTML = `
   <div id="options-container">
     <slot></slot>
   </div>
-`
+`)
 
 class SeZoom extends HTMLElement {
   constructor () {

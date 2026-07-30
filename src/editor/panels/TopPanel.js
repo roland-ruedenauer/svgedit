@@ -3,7 +3,7 @@
 
 import SvgCanvas from '@svgedit/svgcanvas'
 import topPanelHTML from './TopPanel.html'
-import { cloneNodeAndSetNonce } from '../support.js'
+import { cloneNodeAndSetNonce, createTrustedHTML } from '../support.js'
 
 const { $qa, $id, $click, isValidUnit, getTypeMap, convertUnit } = SvgCanvas
 
@@ -960,7 +960,7 @@ class TopPanel {
     // add Top panel
     const template = document.createElement('template')
     const { i18next } = this.editor
-    template.innerHTML = topPanelHTML
+    template.innerHTML = createTrustedHTML(topPanelHTML)
     this.editor.$svgEditor.append(cloneNodeAndSetNonce(template.content))
     // svg editor source dialoag added to DOM
     const newSeEditorDialog = document.createElement(

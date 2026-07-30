@@ -31,7 +31,7 @@ export default {
   name: 'markers',
   async init () {
     const svgEditor = this
-    const { svgCanvas } = svgEditor
+    const { svgCanvas, svgeditPolicy } = svgEditor
     const { BatchCommand, RemoveElementCommand, InsertElementCommand } = svgCanvas.history
     const { $id, addSVGElementsFromJson: addElem } = svgCanvas
     const mtypes = ['start', 'mid', 'end']
@@ -288,7 +288,7 @@ export default {
           innerHTML += '</se-list>'
         })
         innerHTML += '</div>'
-        panelTemplate.innerHTML = innerHTML
+        panelTemplate.innerHTML = svgeditPolicy.createHTML(innerHTML)
         $id('tools_top').appendChild(panelTemplate.content.cloneNode(true))
         // don't display the panels on start
         showPanel(false)

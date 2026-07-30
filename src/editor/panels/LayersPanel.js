@@ -1,6 +1,6 @@
 import SvgCanvas from '@svgedit/svgcanvas'
 import LayersPanelHtml from './LayersPanel.html'
-import { cloneNodeAndSetNonce } from '../support.js'
+import { cloneNodeAndSetNonce, createTrustedHTML } from '../support.js'
 
 const { $id, $click } = SvgCanvas
 
@@ -47,7 +47,7 @@ class LayersPanel {
     const template = document.createElement('template')
     const { i18next } = this.editor
 
-    template.innerHTML = LayersPanelHtml
+    template.innerHTML = createTrustedHTML(LayersPanelHtml)
     this.editor.$svgEditor.append(cloneNodeAndSetNonce(template.content))
     // layer menu added to DOM
     const menuMore = document.createElement('se-cmenu-layers')
@@ -319,7 +319,7 @@ class LayersPanel {
     while (num-- > 0) {
       // TODO: there must a better way to do this
       const tlayer = document.createElement('tr')
-      tlayer.innerHTML = '<td class="layerempty">_</td><td/>'
+      tlayer.innerHTML = createTrustedHTML('<td class="layerempty">_</td><td/>')
       layerlist.append(tlayer)
     }
     // run extension when layer panel is populated

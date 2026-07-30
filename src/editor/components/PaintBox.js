@@ -1,4 +1,6 @@
 import { jGraduate } from './jgraduate/jQuery.jGraduate.js'
+import { createTrustedHTML } from '../support.js'
+
 /**
  *
  */
@@ -9,14 +11,14 @@ class PaintBox {
      */
   constructor (container, type) {
     // set up gradients to be used for the buttons
-    const svgdocbox = new DOMParser().parseFromString(
+    const html = createTrustedHTML(
       `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14">
           <rect
             fill="#000000" opacity="1" width="14" height="14"/>
           <defs><linearGradient id="gradbox_${PaintBox.ctr++}"/></defs>
-        </svg>`,
-      'text/xml'
+        </svg>`
     )
+    const svgdocbox = new DOMParser().parseFromString(html, 'text/xml')
 
     let docElem = svgdocbox.documentElement
     docElem = document.importNode(docElem, true)

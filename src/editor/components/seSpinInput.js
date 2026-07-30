@@ -1,10 +1,10 @@
 /* globals svgEditor */
 import '../dialogs/se-elix/define/NumberSpinBox.js'
 import { t } from '../locale.js'
-import { cloneNodeAndSetNonce } from '../support.js'
+import { cloneNodeAndSetNonce, createTrustedHTML } from '../support.js'
 
 const template = document.createElement('template')
-template.innerHTML = `
+template.innerHTML = createTrustedHTML(`
   <style>
   div {
     height: 24px;
@@ -50,7 +50,7 @@ template.innerHTML = `
   <span id="label">label</span>
   <elix-number-spin-box min="1" step="1"></elix-number-spin-box>
   </div>
-`
+`)
 
 /**
  * @class SESpinInput

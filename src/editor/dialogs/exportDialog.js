@@ -1,11 +1,11 @@
 /* globals svgEditor */
 import './se-elix/define/NumberSpinBox.js'
 
-import { cloneNodeAndSetNonce } from '../support.js'
+import { cloneNodeAndSetNonce, createTrustedHTML } from '../support.js'
 import exportDialogHTML from './exportDialog.html'
 
 const template = document.createElement('template')
-template.innerHTML = exportDialogHTML
+template.innerHTML = createTrustedHTML(exportDialogHTML)
 
 /**
  * @class SeExportDialog

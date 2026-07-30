@@ -8,7 +8,7 @@ import {
 import editorTemplate from './templates/editorTemplate.html'
 import SvgCanvas from '@svgedit/svgcanvas'
 import Rulers from './Rulers.js'
-import { cloneNodeAndSetNonce } from './support.js'
+import { cloneNodeAndSetNonce, createTrustedHTML, svgeditPolicy } from './support.js'
 
 /**
    * @fires module:svgcanvas.SvgCanvas#event:svgEditorReady
@@ -40,7 +40,7 @@ const readySignal = () => {
   }
 }
 
-const { $id, $click, convertUnit } = SvgCanvas
+const { $id, $click, convertUnit, setTrustedTypePolicy } = SvgCanvas
 
 /**
  *
@@ -61,6 +61,8 @@ class EditorStartup {
   * @returns {void}
   */
   async init () {
+    this.svgeditPolicy = svgeditPolicy
+    setTrustedTypePolicy(svgeditPolicy)
     if ('localStorage' in window) {
       this.storage = window.localStorage
     }
@@ -72,7 +74,7 @@ class EditorStartup {
     try {
       // add editor components to the DOM
       const template = document.createElement('template')
-      template.innerHTML = editorTemplate
+      template.innerHTML = createTrustedHTML(editorTemplate)
       this.$container.append(cloneNodeAndSetNonce(template.content))
       this.$svgEditor = this.$container.querySelector('.svg_editor')
       // allow to prepare the dom without display

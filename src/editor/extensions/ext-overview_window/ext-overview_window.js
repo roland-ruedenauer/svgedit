@@ -12,11 +12,12 @@ export default {
   name: 'overview_window',
   init ({ _$ }) {
     const svgEditor = this
-    const { $id, $click } = svgEditor.svgCanvas
+    const { svgCanvas, svgeditPolicy } = svgEditor
+    const { $id, $click } = svgCanvas
     const overviewWindowGlobals = {}
 
     // Define and insert the base html element.
-    const propsWindowHtml =
+    const propsWindowHtml = svgeditPolicy.createHTML(
       '<div id="overview_window_content_pane">' +
         '<div id="overview_window_content">' +
           '<div>' +
@@ -29,7 +30,7 @@ export default {
             '</div>' +
           '</div>' +
         '</div>' +
-      '</div>'
+      '</div>')
     $id('sidepanel_content').insertAdjacentHTML('beforeend', propsWindowHtml)
 
     // Define dynamic animation of the view box.

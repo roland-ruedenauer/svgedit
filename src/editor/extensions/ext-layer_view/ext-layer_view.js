@@ -24,7 +24,7 @@ export default {
   name,
   async init (_S) {
     const svgEditor = this
-    const { svgCanvas } = svgEditor
+    const { svgCanvas, svgeditPolicy } = svgEditor
     const { $id, $click } = svgCanvas
     await loadExtensionTranslation(svgEditor)
 
@@ -75,8 +75,8 @@ export default {
         const buttonTemplate = document.createElement('template')
         const title = `${name}:buttons.0.title`
         const key = `${name}:buttons.0.key`
-        buttonTemplate.innerHTML = `
-      <se-button id="tool_layerView" title="${title}" shortcut="${key}" src="layer_view.svg"></se-button>`
+        buttonTemplate.innerHTML = svgeditPolicy.createHTML(`
+          <se-button id="tool_layerView" title="${title}" shortcut="${key}" src="layer_view.svg"></se-button>`);
         $id('editor_panel').append(buttonTemplate.content.cloneNode(true))
         $click($id('tool_layerView'), clickLayerView.bind(this))
       }

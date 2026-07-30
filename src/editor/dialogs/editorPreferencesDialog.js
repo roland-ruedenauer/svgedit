@@ -1,9 +1,9 @@
 /* globals svgEditor */
 import editorPreferencesDialog from './editorPreferencesDialog.html'
-import { cloneNodeAndSetNonce } from '../support.js'
+import { cloneNodeAndSetNonce, createTrustedHTML } from '../support.js'
 
 const template = document.createElement('template')
-template.innerHTML = editorPreferencesDialog
+template.innerHTML = createTrustedHTML(editorPreferencesDialog)
 
 /**
  * @class SeEditPrefsDialog

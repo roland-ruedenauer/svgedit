@@ -66,6 +66,7 @@ import {
   getFeGaussianBlur,
   stringToHTML,
   insertChildAtIndex,
+  setTrustedTypePolicy,
 } from "./core/utilities.js";
 import {
   matrixMultiply,
@@ -1384,5 +1385,6 @@ SvgCanvas.getTypeMap = getTypeMap
 SvgCanvas.convertToNum = convertToNum
 SvgCanvas.isValidUnit = isValidUnit
 SvgCanvas.convertUnit = convertUnit
+SvgCanvas.setTrustedTypePolicy = setTrustedTypePolicy
 
 export default SvgCanvas

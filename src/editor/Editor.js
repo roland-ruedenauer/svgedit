@@ -27,6 +27,7 @@ import BottomPanel from './panels/BottomPanel.js'
 import LayersPanel from './panels/LayersPanel.js'
 import MainMenu from './MainMenu.js'
 import { getParentsUntil } from '@svgedit/svgcanvas/common/util.js'
+import { createTrustedHTML } from './support.js'
 
 const { $id, $click, decode64 } = SvgCanvas
 
@@ -912,7 +913,7 @@ class Editor extends EditorStartup {
       this.curContext = null
     }
     $id('cur_context_panel').style.display = context ? 'block' : 'none'
-    $id('cur_context_panel').innerHTML = linkStr
+    $id('cur_context_panel').innerHTML = createTrustedHTML(linkStr)
   }
 
   /**

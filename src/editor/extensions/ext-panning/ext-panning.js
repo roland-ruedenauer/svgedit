@@ -30,7 +30,7 @@ export default {
     const svgEditor = this
     await loadExtensionTranslation(svgEditor)
     const {
-      svgCanvas
+      svgCanvas, svgeditPolicy
     } = svgEditor
     const { $id, $click } = svgCanvas
     const insertAfter = (referenceNode, newNode) => {
@@ -42,9 +42,9 @@ export default {
         const btitle = `${svgEditor.i18next.t(`${name}:buttons.0.title`)} ${svgEditor.i18next.t(`${name}:buttons.0.key`)}`
         // Add the button and its handler(s)
         const buttonTemplate = document.createElement('template')
-        buttonTemplate.innerHTML = `
+        buttonTemplate.innerHTML = svgeditPolicy.createHTML(`
         <se-button id="ext-panning" title="${btitle}" src="panning.svg"></se-button>
-        `
+        `)
         insertAfter($id('tool_zoom'), buttonTemplate.content.cloneNode(true))
         $click($id('ext-panning'), () => {
           if (this.leftPanel.updateLeftPanel('ext-panning')) {

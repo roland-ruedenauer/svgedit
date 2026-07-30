@@ -1,9 +1,9 @@
 /* globals svgEditor */
 import { t } from '../locale.js'
-import { cloneNodeAndSetNonce } from '../support.js'
+import { cloneNodeAndSetNonce, createTrustedHTML } from '../support.js'
 
 const template = document.createElement('template')
-template.innerHTML = `
+template.innerHTML = createTrustedHTML(`
 <style>
 #select-container {
   margin-top: 10px;
@@ -42,8 +42,8 @@ template.innerHTML = `
       <slot></slot>
     </div>
   </div>
+`)
 
-`
 /**
  * @class SeList
  */

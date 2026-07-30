@@ -1,8 +1,14 @@
 /* globals svgEditor */
 import storageDialogHTML from './storageDialog.html'
 
-const template = document.createElement('template')
-template.innerHTML = storageDialogHTML
+let svgeditPolicy_ = null
+let template = null
+
+export function initialize(svgeditPolicy) {
+  svgeditPolicy_ = svgeditPolicy
+  template = document.createElement("template")
+  template.innerHTML = svgeditPolicy.createHTML(storageDialogHTML)
+}
 
 // XXX: provide functionality in svgeditor?
 const cloneNodeAndSetNonce = function (node) {

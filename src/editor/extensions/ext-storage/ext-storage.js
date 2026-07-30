@@ -18,7 +18,8 @@
  * @todo We might provide control of storage settings through the UI besides the
  *   initial (or URL-forced) dialog. *
  */
-import './storageDialog.js'
+
+import { initialize } from './storageDialog.js'
 
 /**
  * Expire the storage cookie.
@@ -27,6 +28,7 @@ import './storageDialog.js'
 const removeStoragePrefCookie = () => {
   expireCookie('svgeditstore')
 }
+
 /**
  * Set the cookie to expire.
  * @param {string} cookie
@@ -63,7 +65,9 @@ export default {
   name: 'storage',
   init () {
     const svgEditor = this
-    const { svgCanvas, storage } = svgEditor
+    const { svgCanvas, svgeditPolicy, storage } = svgEditor
+
+    initialize(svgeditPolicy)
 
     // We could empty any already-set data for users when they decline storage,
     //  but it would be a risk for users who wanted to store but accidentally

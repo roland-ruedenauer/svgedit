@@ -1,12 +1,12 @@
 import SvgCanvas from '@svgedit/svgcanvas'
 /* globals svgEditor */
 import imagePropertiesDialogHTML from './imagePropertiesDialog.html'
-import { cloneNodeAndSetNonce } from '../support.js'
+import { cloneNodeAndSetNonce, createTrustedHTML } from '../support.js'
 
 const { isValidUnit } = SvgCanvas
 
 const template = document.createElement('template')
-template.innerHTML = imagePropertiesDialogHTML
+template.innerHTML = createTrustedHTML(imagePropertiesDialogHTML)
 
 /**
  * @class SeImgPropDialog

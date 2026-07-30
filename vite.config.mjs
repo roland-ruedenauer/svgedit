@@ -5,7 +5,7 @@ import string from 'vite-plugin-string'
 import istanbul from 'vite-plugin-istanbul'
 
 const cspHeaders = {
-  'Content-Security-Policy-Report-Only': `script-src 'self'; style-src-attr 'self'; style-src-elem 'self' 'nonce-TESTNONCE'; frame-ancestors 'self'; frame-src 'self';`
+  'Content-Security-Policy-Report-Only': `script-src 'self'; style-src-attr 'self'; style-src-elem 'self' 'nonce-TESTNONCE'; frame-ancestors 'self'; frame-src 'self'; require-trusted-types-for 'script'; trusted-types elix svgedit;`,
 }
 
 const editorEntries = [

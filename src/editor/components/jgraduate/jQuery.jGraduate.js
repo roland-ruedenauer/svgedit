@@ -21,6 +21,7 @@
 import SvgCanvas from '@svgedit/svgcanvas'
 import { jPickerDefaults, jPickerMethod } from './jQuery.jPicker.js'
 import { findPos } from '@svgedit/svgcanvas/common/util.js'
+import { createTrustedHTML } from '../../support.js'
 
 /**
  * @todo JFH: This jQuery plugin was adapted to work within a Web Component.
@@ -230,7 +231,7 @@ export function jGraduateMethod (elem, options, okCallback, cancelCallback, i18n
     $this.paint = new jGraduate.Paint({ solidColor: 'ffffff' })
   }
   $this.classList.add('jGraduate_Picker')
-  $this.innerHTML = `<ul class="jGraduate_tabs">
+  $this.innerHTML = createTrustedHTML(`<ul class="jGraduate_tabs">
       <li class="jGraduate_tab_color jGraduate_tab_current" id="jGraduate_tab_color" data-type="col">${i18next.t('config.jgraduate_solid_color')}</li>
       <li class="jGraduate_tab_lingrad" id="jGraduate_tab_lingrad" data-type="lg">${i18next.t('config.jgraduate_linear_gradient')}</li>
       <li class="jGraduate_tab_radgrad" id="jGraduate_tab_radgrad" data-type="rg">${i18next.t('config.jgraduate_radial_gradient')}</li>
@@ -238,10 +239,10 @@ export function jGraduateMethod (elem, options, okCallback, cancelCallback, i18n
     <div class="jGraduate_colPick" id="jGraduate_colPick"></div>
     <div class="jGraduate_gradPick" id="jGraduate_gradPick"></div>
     <div class="jGraduate_LightBox" id="jGraduate_LightBox"></div>
-    <div id="${id}_jGraduate_stopPicker" class="jGraduate_stopPicker"></div>`
+    <div id="${id}_jGraduate_stopPicker" class="jGraduate_stopPicker"></div>`)
   const colPicker = $this.querySelector('#jGraduate_colPick')
   const gradPicker = $this.querySelector('#jGraduate_gradPick')
-  const html = `<div id="${id}_jGraduate_Swatch" class="jGraduate_Swatch">
+  const html = createTrustedHTML(`<div id="${id}_jGraduate_Swatch" class="jGraduate_Swatch">
         <h2 class="jGraduate_Title">${$settings.window.pickerTitle}</h2>
         <div id="${id}_jGraduate_GradContainer" class="jGraduate_GradContainer"></div>
         <div id="${id}_jGraduate_StopSlider" class="jGraduate_StopSlider"></div>
@@ -330,7 +331,7 @@ export function jGraduateMethod (elem, options, okCallback, cancelCallback, i18n
       <div class="jGraduate_OkCancel">
         <input type="button" id="${id}_jGraduate_Ok" class="jGraduate_Ok" value="${i18next.t('common.ok')}"/>
         <input type="button" id="${id}_jGraduate_Cancel" class="jGraduate_Cancel" value="${i18next.t('common.cancel')}"/>
-      </div>`
+      </div>`)
   const div = document.createElement('div')
   div.innerHTML = html
   while (div.children.length > 0) {

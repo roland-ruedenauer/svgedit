@@ -1,6 +1,6 @@
 /* globals svgEditor */
 /* eslint-disable max-len */
-import { cloneNodeAndSetNonce } from '../support.js'
+import { cloneNodeAndSetNonce, createTrustedHTML } from '../support.js'
 
 const palette = [
   // Todo: Make into configuration item?
@@ -49,7 +49,7 @@ const palette = [
 ]
 
 const template = document.createElement('template')
-template.innerHTML = `
+template.innerHTML = createTrustedHTML(`
   <style>
   .square {
     height: 15px;
@@ -63,20 +63,20 @@ template.innerHTML = `
     border-radius: 3px;
     z-index: 2;
   }
-  
+
   #js-se-palette {
     float: left;
     min-width: 30px;
     height: 15px;
     overflow: hidden;
   }
-  
+
   div.palette_item {
     height: 15px;
     width: 15px;
     float: left;
   }
-  
+
   div.palette_item:first-child {
     background: white;
   }
@@ -105,7 +105,7 @@ template.innerHTML = `
     bottom: 36px;
     right: 30px;
   }
-  
+
   </style>
   <div id="palette_holder" title="">
     <div id="js-se-palette">
@@ -114,7 +114,7 @@ template.innerHTML = `
   <button class="palette_expand_btn" title="Show whole palette">▼</button>
   <!-- hidden div -->
   <div id="palette_popup"/>
-`
+`)
 
 /**
  * @class SEPalette

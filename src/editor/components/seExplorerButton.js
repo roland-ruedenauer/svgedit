@@ -1,6 +1,6 @@
 /* globals svgEditor */
 
-import { cloneNodeAndSetNonce } from '../support'
+import { cloneNodeAndSetNonce, createTrustedHTML } from '../support'
 
 /**
  * @class ExplorerButton
@@ -44,7 +44,7 @@ export class ExplorerButton extends HTMLElement {
 
   createTemplate (imgPath) {
     const template = document.createElement('template')
-    template.innerHTML = `
+    template.innerHTML = createTrustedHTML(`
     <style>
     :host {
       position:relative;
@@ -139,7 +139,7 @@ export class ExplorerButton extends HTMLElement {
       <div class="menu">
         <div class="menu-item">menu</div>
      </div>
-    </div>`
+    </div>`)
     return template
   }
 
@@ -186,9 +186,10 @@ export class ExplorerButton extends HTMLElement {
           const response = await fetch(`${newValue}index.json`)
           const json = await response.json()
           const { lib } = json
-          this.$menu.innerHTML = lib.map((menu, i) => (
+          const html = lib.map((menu, i) => (
           `<div data-menu="${menu}" class="menu-item ${(i === 0) ? 'pressed' : ''} ">${menu}</div>`
           )).join('')
+          this.$menu.innerHTML = createTrustedHTML(html)
           await this.updateLib(lib[0])
         } catch (error) {
           console.error(error)
@@ -324,13 +325,14 @@ export class ExplorerButton extends HTMLElement {
       const off = size * 0.05
       const vb = [-off, -off, size + off * 2, size + off * 2].join(' ')
       const stroke = json.fill ? 0 : (size / 30)
-      this.$lib.innerHTML = Object.entries(this.data).map(([key, path]) => {
+      const html = Object.entries(this.data).map(([key, path]) => {
         const encoded = btoa(`
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24">
           <svg viewBox="${vb}"><path fill="${fill}" stroke="#f8bb00" stroke-width="${stroke}" d="${path}"></path></svg>
         </svg>`)
         return `<se-button data-shape="${key}"src="data:image/svg+xml;base64,${encoded}"></se-button>`
       }).join('')
+      this.$lib.innerHTML = createTrustedHTML(html)
     } catch (error) {
       console.error(`could not read file:${libDir}${lib}.json`, error)
     }

@@ -19,6 +19,7 @@
 import ColorValuePicker from './ColorValuePicker.js'
 import Slider from './Slider.js'
 import { findPos, mergeDeep } from '@svgedit/svgcanvas/common/util.js'
+import { createTrustedHTML } from '../../support.js'
 
 /**
 * @external Math
@@ -1335,7 +1336,7 @@ export function jPickerMethod (elem, options, commitCallback, liveCallback, canc
       if (currTable) { currTable.remove() }
     })
 
-    const controlHtml = `<table class="jPicker" id="jPicker-table" cellpadding="0" cellspacing="0">
+    const controlHtml = createTrustedHTML(`<table class="jPicker" id="jPicker-table" cellpadding="0" cellspacing="0">
       <tbody>
         ${win.expandable ? '<tr><td class="Move" colspan="5">&nbsp;</td></tr>' : ''}
         <tr>
@@ -1375,7 +1376,7 @@ export function jPickerMethod (elem, options, commitCallback, liveCallback, canc
         <tr class="Hex">
           <td colspan="2" class="Text"><label title="${i18next.t('config.jpicker_tooltip_hex_textbox')}">#:<input type="text" maxlength="6" class="Hex" value="${all ? all.hex : ''}"/></label>${win.alphaSupport ? `<input type="text" maxlength="2" class="AHex" value="${all ? all.ahex.substring(6) : ''}" title="${i18next.t('config.jpicker_tooltip_hex_alpha')}"/></td>` : '&nbsp;'}
         </tr>
-      </tbody></table>`
+      </tbody></table>`)
     if (win.expandable) {
       container.innerHTML = controlHtml
       if (!that.querySelectorAll('div.jPicker.Container').length) {
@@ -1516,7 +1517,7 @@ export function jPickerMethod (elem, options, commitCallback, liveCallback, canc
       }
       setImg.call(that, grid, images.clientPath + 'bar-opacity.png')
       const div = document.createElement('div')
-      div.innerHTML = html
+      div.innerHTML = createTrustedHTML(html)
       while (div.children.length > 0) {
         grid.appendChild(div.children[0])
       }

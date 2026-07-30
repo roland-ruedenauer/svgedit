@@ -1,9 +1,9 @@
 /* globals svgEditor */
 import cMenuLayersDialog from './cmenuLayersDialog.html'
-import { cloneNodeAndSetNonce } from '../support.js'
+import { cloneNodeAndSetNonce, createTrustedHTML } from '../support.js'
 
 const template = document.createElement('template')
-template.innerHTML = cMenuLayersDialog
+template.innerHTML = createTrustedHTML(cMenuLayersDialog)
 
 /**
  * @class SeCMenuLayerDialog

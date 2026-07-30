@@ -27,7 +27,7 @@ export default {
   name,
   async init (S) {
     const svgEditor = this
-    const { svgCanvas } = svgEditor
+    const { svgCanvas, svgeditPolicy } = svgEditor
     const { getElement, $id, $click, addSVGElementsFromJson } = svgCanvas
     const { svgroot, selectorManager } = S
     const seNs = svgCanvas.getEditorNS()
@@ -397,9 +397,9 @@ export default {
         // Add the button and its handler(s)
         const buttonTemplate = document.createElement('template')
         const title = `${name}:buttons.0.title`
-        buttonTemplate.innerHTML = `
+        buttonTemplate.innerHTML = svgeditPolicy.createHTML(`
          <se-button id="tool_connect" title="${title}" src="conn.svg"></se-button>
-         `
+         `)
         $id('tools_left').append(buttonTemplate.content.cloneNode(true))
         $click($id('tool_connect'), () => {
           if (this.leftPanel.updateLeftPanel('tool_connect')) {

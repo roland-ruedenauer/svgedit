@@ -26,7 +26,7 @@ export default {
   name,
   async init () {
     const svgEditor = this
-    const { svgCanvas } = svgEditor
+    const { svgCanvas, svgeditPolicy } = svgEditor
     const { ChangeElementCommand } = svgCanvas.history
     const addToHistory = (cmd) => { svgCanvas.undoMgr.addCommandToHistory(cmd) }
     const { $id, $click } = svgCanvas
@@ -114,7 +114,7 @@ export default {
         const title3 = `${name}:contextTools.3.title`
         // Add the context panel and its handler(s)
         const panelTemplate = document.createElement('template')
-        panelTemplate.innerHTML = `
+        panelTemplate.innerHTML = svgeditPolicy.createHTML(`
           <div id="star_panel">
             <se-spin-input id="starNumPoints" label="${label0}" min=1 step=1 value=5 title="${title0}">
             </se-spin-input>
@@ -127,7 +127,7 @@ export default {
             <se-spin-input size="3" id="polySides" min=1 step=1 value=5 label="${label3}" title="${title3}">
             </se-spin-input>
           </div>
-        `
+        `)
         // add handlers for the panel
         $id('tools_top').appendChild(panelTemplate.content.cloneNode(true))
         // don't display the panels on start

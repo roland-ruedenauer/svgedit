@@ -1,6 +1,7 @@
 import SvgCanvas from '@svgedit/svgcanvas'
 import { jGraduate } from '../components/jgraduate/jQuery.jGraduate.js'
 import BottomPanelHtml from './BottomPanel.html'
+import { createTrustedHTML } from '../support.js'
 
 const { $id } = SvgCanvas
 
@@ -193,7 +194,7 @@ class BottomPanel {
     const template = document.createElement('template')
     const { i18next } = this.editor
 
-    template.innerHTML = BottomPanelHtml
+    template.innerHTML = createTrustedHTML(BottomPanelHtml)
     this.editor.$svgEditor.append(template.content.cloneNode(true))
     $id('palette').addEventListener('change', this.handlePalette.bind(this))
     $id('palette').init(i18next)

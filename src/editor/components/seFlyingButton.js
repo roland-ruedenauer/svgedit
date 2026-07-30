@@ -1,6 +1,6 @@
 /* globals svgEditor */
 import { t } from '../locale.js'
-import { cloneNodeAndSetNonce } from '../support.js'
+import { cloneNodeAndSetNonce, createTrustedHTML } from '../support.js'
 
 /**
  * @class FlyingButton
@@ -42,7 +42,7 @@ export class FlyingButton extends HTMLElement {
 
   createTemplate (imgPath) {
     const template = document.createElement('template')
-    template.innerHTML = `
+    template.innerHTML = createTrustedHTML(`
       <style>
         :host {
           position:relative;
@@ -125,7 +125,7 @@ export class FlyingButton extends HTMLElement {
           <img class="button-icon" src="logo.svg" alt="icon">
           <div class="handle"></div>
         </div>
-      </div>`
+      </div>`)
     return template
   }
 

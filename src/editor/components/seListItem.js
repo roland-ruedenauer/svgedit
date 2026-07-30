@@ -1,9 +1,9 @@
 /* globals svgEditor */
 import { t } from '../locale.js'
-import { cloneNodeAndSetNonce } from '../support.js'
+import { cloneNodeAndSetNonce, createTrustedHTML } from '../support.js'
 
 const template = document.createElement('template')
-template.innerHTML = `
+template.innerHTML = createTrustedHTML(`
   <style>
   [aria-label="option"]{
     padding:0.25rem 0.125rem !important;
@@ -22,7 +22,8 @@ template.innerHTML = `
     <img alt="icon" />
     <slot></slot>
   </div>
-`
+`)
+
 /**
  * @class SeMenu
  */

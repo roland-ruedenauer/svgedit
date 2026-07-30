@@ -1,10 +1,10 @@
 /* globals svgEditor */
 import 'elix/define/MenuItem.js'
 import './sePlainMenuButton.js'
-import { cloneNodeAndSetNonce } from '../support.js'
+import { cloneNodeAndSetNonce, createTrustedHTML } from '../support.js'
 
 const template = document.createElement('template')
-template.innerHTML = `
+template.innerHTML = createTrustedHTML(`
   <style>
   :host {
     padding: 0px;
@@ -29,7 +29,7 @@ template.innerHTML = `
   <elix-menu-button id="MenuButton" aria-label="Main Menu">
     <slot></slot>
   </elix-menu-button>
-`
+`)
 
 /**
  * @class SeMenu

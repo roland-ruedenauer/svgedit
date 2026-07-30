@@ -1,5 +1,6 @@
 import SvgCanvas from '@svgedit/svgcanvas'
 import leftPanelHTML from './LeftPanel.html'
+import { createTrustedHTML } from '../support.js'
 
 const { $id, $qa, $click } = SvgCanvas
 
@@ -199,7 +200,7 @@ class LeftPanel {
   init () {
     // add Left panel
     const template = document.createElement('template')
-    template.innerHTML = leftPanelHTML
+    template.innerHTML = createTrustedHTML(leftPanelHTML)
     this.editor.$svgEditor.append(template.content.cloneNode(true))
     // register actions for left panel
     $click($id('tool_select'), this.clickSelect.bind(this))

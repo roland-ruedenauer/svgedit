@@ -1,8 +1,8 @@
 import { t } from '../locale.js'
-import { cloneNodeAndSetNonce } from '../support.js'
+import { cloneNodeAndSetNonce, createTrustedHTML } from '../support.js'
 
 const template = document.createElement('template')
-template.innerHTML = `
+template.innerHTML = createTrustedHTML(`
   <style>
   #layersLabel {
     font-size: 13px;
@@ -11,7 +11,8 @@ template.innerHTML = `
   }
   </style>
   <div></div>
-`
+`)
+
 /**
  * @class SeText
  */

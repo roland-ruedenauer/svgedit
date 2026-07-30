@@ -2,10 +2,10 @@
 import { jGraduate, jGraduateMethod } from './jgraduate/jQuery.jGraduate.js'
 import PaintBox from './PaintBox.js'
 import { t } from '../locale.js'
-import { cloneNodeAndSetNonce } from '../support.js'
+import { cloneNodeAndSetNonce, createTrustedHTML } from '../support.js'
 
 const template = document.createElement('template')
-template.innerHTML = `
+template.innerHTML = createTrustedHTML(`
   <style>
   .jPicker .Icon {
     display: inline-block;
@@ -646,7 +646,7 @@ div.jGraduate_Slider img {
   </div>
   <!-- hidden div -->
   <div id="color_picker"></div>
-`
+`)
 
 /**
  * @class SeColorPicker

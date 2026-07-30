@@ -1,9 +1,9 @@
 import 'elix/define/Input.js'
 import { t } from '../locale.js'
-import { cloneNodeAndSetNonce } from '../support.js'
+import { cloneNodeAndSetNonce, createTrustedHTML } from '../support.js'
 
 const template = document.createElement('template')
-template.innerHTML = `
+template.innerHTML = createTrustedHTML(`
   <style>
   div {
     height: 24px;
@@ -33,7 +33,7 @@ template.innerHTML = `
   <span id="label">label</span>
   <elix-input></elix-input>
   </div>
-`
+`)
 
 /**
  * @class SEInput

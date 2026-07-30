@@ -17,6 +17,16 @@ import {
 } from './math.js'
 import { getClosest, mergeDeep } from '../common/util.js'
 
+let trustedTypePolicy = null
+
+export function setTrustedTypePolicy(policy) {
+  trustedTypePolicy = policy;
+}
+
+export function createTrustedHTML(html) {
+  return trustedTypePolicy?.createHTML(html) ?? html
+}
+
 // Much faster than running getBBox() every time
 const visElems =
   'a,circle,ellipse,foreignObject,g,image,line,path,polygon,polyline,rect,svg,text,tspan,use,clipPath'
@@ -280,7 +290,7 @@ export const text2xml = (sXML) => {
   }
 
   try {
-    return parser.parseFromString(xmlString, 'text/xml')
+    return parser.parseFromString(createTrustedHTML(xmlString), 'text/xml')
   } catch (e) {
     throw new Error(`Error parsing XML string: ${e.message}`)
   }
@@ -1420,7 +1430,7 @@ export const mock = ({
 
 export const stringToHTML = str => {
   const parser = new DOMParser()
-  const doc = parser.parseFromString(str, 'text/html')
+  const doc = parser.parseFromString(createTrustedHTML(str), 'text/html')
   return doc.body.firstChild
 }
 
